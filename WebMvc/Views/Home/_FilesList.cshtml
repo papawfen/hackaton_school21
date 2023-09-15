@@ -1,0 +1,8 @@
+@model IEnumerable<WebMvc.Models.File>
+
+<ul>
+    @foreach (var file in Model)
+    {
+        <li>@file.ToString()</li>
+    }
+</ul>

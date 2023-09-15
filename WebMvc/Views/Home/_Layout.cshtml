@@ -1,21 +1,28 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
-    <title>Info21 | @ViewBag.Title</title>
+    <title>FileStorage | @ViewBag.Title</title>
 </head>
 <body>
+
 <div>
-    <a href="@Url.Action("Login")">Login</a> | <a href="@Url.Action("About")">About</a>
+    <a href="@Url.Action("MyFiles")">MyFiles</a>
+    <a href="@Url.Action("SharedFiles")">SharedFiles</a>
+    <a href="@Url.Action("About")">About</a>
+    
+    <a href="@Url.Action("Login")">Login</a>
 </div>
 <div>
     @RenderBody()
 </div>
+
 <footer>
     @if (IsSectionDefined("Footer"))
     {
         @await RenderSectionAsync("Footer")
     }
 </footer>
+
 </body>
 </html>

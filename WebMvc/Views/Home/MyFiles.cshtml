@@ -1,0 +1,10 @@
+﻿@page
+@using WebMvc.Models
+
+@{
+    ViewBag.Title = "MyFiles";
+}
+
+@{
+    await Html.RenderPartialAsync("_FilesList", new List<File> { new("my1"), new("my1my1"), new("my1my1my1") });
+}

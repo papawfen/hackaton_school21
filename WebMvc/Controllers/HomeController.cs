@@ -20,4 +20,14 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult MyFiles()
+    {
+        return View();
+    }
+
+    public IActionResult SharedFiles()
+    {
+        return View();
+    }
 }
