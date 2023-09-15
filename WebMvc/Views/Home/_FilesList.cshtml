@@ -1,8 +1,12 @@
-@model IEnumerable<WebMvc.Models.File>
+@model IEnumerable<WebMvc.Models.MediaEntry.IMediaEntry>
 
 <ul>
     @foreach (var file in Model)
     {
-        <li>@file.ToString()</li>
+        <li>
+            <div>
+                @file.Name - @file.CreationDate
+            </div>
+        </li>
     }
 </ul>

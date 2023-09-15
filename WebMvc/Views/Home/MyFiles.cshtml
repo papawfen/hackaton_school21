@@ -1,10 +1,15 @@
 ﻿@page
-@using WebMvc.Models
+@using WebMvc.Models.MediaEntry
 
 @{
     ViewBag.Title = "MyFiles";
 }
 
 @{
-    await Html.RenderPartialAsync("_FilesList", new List<File> { new("my1"), new("my1my1"), new("my1my1my1") });
+    await Html.RenderPartialAsync("_FilesList", new List<MediaEntry>
+    {
+        new MediaEntryBuilder().SetName("Filename1").SetCreationDate(DateTime.Now).Build(),
+        new MediaEntryBuilder().SetName("Filename2").SetCreationDate(DateTime.Now).Build(),
+        new MediaEntryBuilder().SetName("Filename3").SetCreationDate(new DateTime(2023, 05, 05)).Build(),
+    });
 }

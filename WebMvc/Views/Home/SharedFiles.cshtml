@@ -1,10 +1,13 @@
 ﻿@page
-@using WebMvc.Models
+@using WebMvc.Models.MediaEntry
 
 @{
     ViewBag.Title = "SharedFiles";
 }
 
 @{
-    await Html.RenderPartialAsync("_FilesList", new List<File> { new("shared1"), new("shared2"), new("shared3") });
+    await Html.RenderPartialAsync("_FilesList", new List<MediaEntry>
+    {
+        new MediaEntryBuilder().Build()
+    });
 }
