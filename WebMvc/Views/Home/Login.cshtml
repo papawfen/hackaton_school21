@@ -1,0 +1,15 @@
+﻿@page
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<form method="post">
+    <input name="login" type="text"/>
+    <input name="password" type="password"/>
+    <input type="submit"/>
+</form>
+
+@{
+    await Html.RenderPartialAsync("SqlRequest", new List<string> {"Abc", "Cba", "Abo", "obA"});
+}
