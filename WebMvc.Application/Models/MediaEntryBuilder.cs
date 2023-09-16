@@ -4,7 +4,7 @@ namespace WebMvc.Application.Models;
 
 public class MediaEntryBuilder
 {
-    private MediaEntry _mediaEntry = new();
+    private readonly MediaEntry _mediaEntry = new();
 
     public MediaEntryBuilder()
     {

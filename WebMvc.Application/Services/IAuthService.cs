@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
-using WebMvc.Application.Models.User;
-using WebMvc.Application.Services.Models;
+using WebMvc.Application.Models;
 
 namespace WebMvc.Application.Services;
 

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebMvc.Application.Models.User;
+using WebMvc.Application.Models;
 using WebMvc.Application.Services;
 
 namespace WebMvc.Application.Controllers;

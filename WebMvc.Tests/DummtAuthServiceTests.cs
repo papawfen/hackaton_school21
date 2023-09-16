@@ -1,4 +1,4 @@
-using WebMvc.Application.Models.User;
+using WebMvc.Application.Models;
 using WebMvc.Application.Services;
 
 namespace WebMvc.Tests;
