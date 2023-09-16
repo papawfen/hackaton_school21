@@ -1,0 +1,15 @@
+﻿@page
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="box-page">
+    <div class="box">
+        <h2>Registration</h2>
+        <input type="text" placeholder="username">
+        <input type="password" placeholder="password">
+        <button>Register</button>
+        <p>Already registered? <a href="@Url.Action("Login")">Login</a></p>
+    </div>
+</div>

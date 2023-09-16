@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #ff5733;
+    color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 5px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.login a {
+    text-decoration: none;
+    background-color: #ff5733;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.login a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Если мы будем юзать грид, а не список файлов */
+.grid-container {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    grid-gap: 20px;
+    justify-content: center;
+    align-content: center;
+}
+
+.grid-item {
+    background-color: #ccc; /* когда будут миниатюры - тут будут картинки, эту строку убрать вроде надо */
+    width: 128px;
+    height: 128px;
+    transition: background-color 0.3s;
+}
+
+.grid-item:hover {
+    background-color: #999;
+}
+
+/* Тут если будет юзать список файлов */
+/* todo */
+
+/* логин, рестрация, ошибка */
+.box-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+.box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.box button {
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.box button:hover {
+    background-color: rgba(255, 127, 80, 1);
+}

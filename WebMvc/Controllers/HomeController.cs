@@ -14,6 +14,11 @@ public class HomeController : Controller
     public string Login(string login, string password)
         => $"{login} {password}";
 
+    public IActionResult Register()
+    {
+        return View();
+    }
+
 
     [HttpGet]
     public IActionResult About()
