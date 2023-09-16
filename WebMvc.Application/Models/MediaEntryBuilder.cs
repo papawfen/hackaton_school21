@@ -10,6 +10,7 @@ public class MediaEntryBuilder
     {
         _mediaEntry.PreviewIconPath = string.Empty;
         _mediaEntry.Name = string.Empty;
+        _mediaEntry.Size = 0;
         _mediaEntry.CreationDate = DateTime.MinValue;
         _mediaEntry.LastModificationDate = DateTime.MinValue;
     }
@@ -23,6 +24,12 @@ public class MediaEntryBuilder
     public MediaEntryBuilder SetName(string name)
     {
         _mediaEntry.Name = name;
+        return this;
+    }
+
+    public MediaEntryBuilder SetSize(int size)
+    {
+        _mediaEntry.Size = size;
         return this;
     }
 

@@ -69,14 +69,18 @@ nav a:hover {
 }
 
 .grid-item {
-    background-color: #ccc; /* когда будут миниатюры - тут будут картинки, эту строку убрать вроде надо */
     width: 128px;
     height: 128px;
-    transition: background-color 0.3s;
 }
 
-.grid-item:hover {
-    background-color: #999;
+.grid-item-content {
+    width: 128px;
+    height: 128px;
+    transition: opacity 0.3s;
+}
+
+.grid-item-content:hover {
+    opacity: 0.5;
 }
 
 /* Тут если будет юзать список файлов */

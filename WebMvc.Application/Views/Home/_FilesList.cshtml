@@ -1,12 +1,26 @@
 @model IEnumerable<WebMvc.Application.Models.MediaEntry>
 
-<ul>
-    @foreach (var file in Model)
-    {
-        <li>
-            <div>
-                @file.PreviewIconPath @file.Name - @file.Size
-            </div>
-        </li>
-    }
-</ul>
+<main>
+    <div class="content">
+        <div class="grid-container">
+            @foreach (var file in Model)
+            {
+                <div class="grid-item">
+                    <img src="https://www.shutterstock.com/shutterstock/photos/1905929728/display_1500/stock-photo-skeptic-surprised-cat-thinking-dont-know-what-to-do-big-eyes-closeup-tabby-cat-look-side-dont-1905929728.jpg" alt="text" class="grid-item-content">
+                    @file.Name
+                </div>
+            }
+        </div>
+    </div>
+</main>
+
+@* <ul> *@
+@*     @foreach (var file in Model) *@
+@*     { *@
+@*         <li> *@
+@*             <div> *@
+@*                 @file.PreviewIconPath @file.Name - @file.Size *@
+@*             </div> *@
+@*         </li> *@
+@*     } *@
+@* </ul> *@

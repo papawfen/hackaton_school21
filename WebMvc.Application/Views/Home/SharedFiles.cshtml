@@ -8,6 +8,6 @@
 @{
     await Html.RenderPartialAsync("_FilesList", new List<MediaEntry>
     {
-        new MediaEntryBuilder().Build()
+        new MediaEntryBuilder().SetPreviewIconPath("totally/not/fake/icon/path").SetName("We are not gonna implement this feature right now!").SetSize(777).Build()
     });
 }

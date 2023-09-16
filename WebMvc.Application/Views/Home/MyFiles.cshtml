@@ -1,15 +1,11 @@
 ﻿@page
-@using WebMvc.Application.Models
+
+@model IEnumerable<WebMvc.Application.Models.MediaEntry>
 
 @{
     ViewBag.Title = "MyFiles";
 }
 
 @{
-    await Html.RenderPartialAsync("_FilesList", new List<MediaEntry>
-    {
-        new MediaEntryBuilder().SetName("Filename1").Build(),
-        new MediaEntryBuilder().SetName("Filename2").Build(),
-        new MediaEntryBuilder().SetName("Filename3").Build(),
-    });
+    await Html.RenderPartialAsync("_FilesList", ViewBag.Images, ViewData);
 }
