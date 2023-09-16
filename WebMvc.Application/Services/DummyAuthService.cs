@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using WebMvc.Application.Models;
 
@@ -10,7 +12,7 @@ public class DummyAuthService : IAuthService
     private readonly Dictionary<User, UserInfo> _dataBase = new();
     private readonly object _lock = new();
 
-    public async Task Register(User user)
+    public async Task RegisterAsync(User user)
     {
         var task = Task.Run(() =>
             {
@@ -21,6 +23,16 @@ public class DummyAuthService : IAuthService
                         throw new Exception("User already exists");
                     }
 
+                    if (user.Login.Length < 6)
+                    {
+                        throw new Exception("The login length must be greater than 6");
+                    }
+
+                    if (user.Password.Length < 6)
+                    {
+                        throw new Exception("The password length must be greater than 6");
+                    }
+
                     var keys = new UserInfo(Guid.NewGuid().ToByteArray(), Guid.NewGuid().ToByteArray());
                     _dataBase[user] = keys;
                 }
@@ -29,7 +41,7 @@ public class DummyAuthService : IAuthService
         await task;
     }
 
-    public async Task<UserInfo> Login(User user)
+    public async Task<UserInfo> LoginAsync(User user)
     {
         var task = Task.Run(() =>
             {
@@ -44,6 +56,25 @@ public class DummyAuthService : IAuthService
                 }
             }
         );
+
+        return await task;
+    }
+
+    public async Task<bool> ContainsAsync(string login, Guid token)
+    {
+        var task = Task.Run(() =>
+        {
+            lock (_lock)
+            {
+                var record = _dataBase.FirstOrDefault(pair => pair.Key.Login.Equals(login));
+                if (record.Value is null || record.Key is null)
+                {
+                    return false;
+                }
+
+                return token.ToByteArray().SequenceEqual(record.Value.Token);
+            }
+        });
 
         return await task;
     }

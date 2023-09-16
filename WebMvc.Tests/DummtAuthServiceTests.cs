@@ -19,7 +19,7 @@ public class Tests
             new("First", "First"),
             new("Second", "Second")
         };
-        users.ForEach(user => authService.Register(user).Wait());
+        users.ForEach(user => authService.RegisterAsync(user).Wait());
 
         Assert.That(authService.GetDb.All(dbUser => users.Contains(dbUser.Key)));
         Assert.That(authService.GetDb.Count, Is.EqualTo(2));
@@ -29,9 +29,9 @@ public class Tests
     public void TryRegister_TryRegisterSameUser()
     {
         var authService = new DummyAuthServiceForTests();
-        authService.Register(new User("First", "First")).Wait();
+        authService.RegisterAsync(new User("First", "First")).Wait();
 
-        Assert.That(() => authService.Register(new User("First", "First")).Wait(), Throws.Exception);
+        Assert.That(() => authService.RegisterAsync(new User("First", "First")).Wait(), Throws.Exception);
     }
 
     [Test]
@@ -39,9 +39,9 @@ public class Tests
     {
         var authService = new DummyAuthServiceForTests();
         var user = new User("First", "First");
-        authService.Register(user).Wait();
+        authService.RegisterAsync(user).Wait();
 
-        Assert.That(() => authService.Login(user), Throws.Nothing);
+        Assert.That(() => authService.LoginAsync(user), Throws.Nothing);
         Assert.That(authService.GetDb.ContainsKey(user));
     }
 }

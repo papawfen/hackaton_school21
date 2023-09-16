@@ -1,3 +1,3 @@
 namespace WebMvc.Application.Models;
 
-public record UserInfo(byte[] JwtToken, byte[] RefreshToken);
+public record UserInfo(byte[] Token, byte[] RefreshToken);

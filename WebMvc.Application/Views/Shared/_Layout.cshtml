@@ -1,4 +1,32 @@
-﻿<!DOCTYPE html>
+﻿@using WebMvc.Application.Services
+@inject IAuthService AuthService
+
+@{
+    async Task RenderNavBarUser()
+    {
+        var cookies = Context.Request.Cookies;
+        if (cookies.TryGetValue("token", out var token) && cookies.TryGetValue("username", out var login))
+        {
+            try
+            {
+                if (await AuthService.ContainsAsync(login, new Guid(token)))
+                {
+                    @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+        else
+        {
+            @Html.ActionLink("Login", "Login", "Auth")
+        }
+    }
+}
+
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -23,7 +51,7 @@
         </ul>
     </nav>
     <div class="login">
-        @Html.ActionLink("Login", "Login", "Auth")
+        @{ await RenderNavBarUser(); }
     </div>
 </header>
 

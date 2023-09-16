@@ -32,13 +32,17 @@ public class AuthController : Controller
     {
         try
         {
-            var userInfo = await _authService.Login(user);
+            var userInfo = await _authService.LoginAsync(user);
 
-            Response.Cookies.Append("jwt", new Guid(userInfo.JwtToken).ToString(), new CookieOptions
+            Response.Cookies.Append("token", new Guid(userInfo.Token).ToString(), new CookieOptions
             {
                 Secure = true
             });
             Response.Cookies.Append("refresh", new Guid(userInfo.RefreshToken).ToString(), new CookieOptions
+            {
+                Secure = true
+            });
+            Response.Cookies.Append("username", user.Login, new CookieOptions
             {
                 Secure = true
             });
@@ -62,7 +66,7 @@ public class AuthController : Controller
     {
         try
         {
-            await _authService.Register(user);
+            await _authService.RegisterAsync(user);
 
             return RedirectToAction("Login", "Auth");
         }
