@@ -16,7 +16,11 @@ public class DummyAuthService : IAuthService
             {
                 lock (_lock)
                 {
-                    if (_dataBase.ContainsKey(user)) throw new Exception();
+                    if (_dataBase.ContainsKey(user))
+                    {
+                        throw new Exception("User already exists");
+                    }
+
                     var keys = new UserInfo(Guid.NewGuid().ToByteArray(), Guid.NewGuid().ToByteArray());
                     _dataBase[user] = keys;
                 }
@@ -31,7 +35,11 @@ public class DummyAuthService : IAuthService
             {
                 lock (_lock)
                 {
-                    if (!_dataBase.ContainsKey(user)) throw new Exception();
+                    if (!_dataBase.ContainsKey(user))
+                    {
+                        throw new Exception("User doesnt exists");
+                    }
+
                     return _dataBase[user];
                 }
             }
@@ -39,8 +47,9 @@ public class DummyAuthService : IAuthService
 
         return await task;
     }
-    
-    protected Dictionary<User, UserInfo> GetDataBase() {
+
+    protected Dictionary<User, UserInfo> GetDataBase()
+    {
         lock (_lock)
         {
             return new Dictionary<User, UserInfo>(_dataBase);

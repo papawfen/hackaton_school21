@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebMvc.Application.Models;
@@ -32,10 +34,16 @@ public class AuthController : Controller
         {
             var userInfo = await _authService.Login(user);
 
-            Response.Cookies.Append("jwt", BitConverter.ToString(userInfo.JwtToken));
-            Response.Cookies.Append("refresh", BitConverter.ToString(userInfo.RefreshToken));
+            Response.Cookies.Append("jwt", new Guid(userInfo.JwtToken).ToString(), new CookieOptions
+            {
+                Secure = true
+            });
+            Response.Cookies.Append("refresh", new Guid(userInfo.RefreshToken).ToString(), new CookieOptions
+            {
+                Secure = true
+            });
 
-            return NoContent();
+            return RedirectToAction("MyFiles", "Home");
         }
         catch (Exception e)
         {
@@ -56,7 +64,7 @@ public class AuthController : Controller
         {
             await _authService.Register(user);
 
-            return NoContent();
+            return View("Login");
         }
         catch (Exception e)
         {
