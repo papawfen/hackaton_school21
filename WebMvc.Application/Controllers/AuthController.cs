@@ -26,9 +26,21 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public IActionResult Login(User user)
+    public async Task<IActionResult> Login(User user)
     {
-        return NoContent();
+        try
+        {
+            var userInfo = await _authService.TryAuthenticate(user);
+
+            Response.Cookies.Append("jwt", BitConverter.ToString(userInfo.JwtToken));
+            Response.Cookies.Append("refresh", BitConverter.ToString(userInfo.RefreshToken));
+
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return View("_Error", e.Message);
+        }
     }
 
     [HttpGet]
@@ -38,8 +50,20 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public IActionResult Register(User user)
+    public async Task<IActionResult> Register(User user)
     {
-        return View("_Error", $"We are currently not making new account, {user.Login}. Try again later!");
+        try
+        {
+            var userInfo = await _authService.TryRegister(user);
+
+            Response.Cookies.Append("jwt", BitConverter.ToString(userInfo.JwtToken));
+            Response.Cookies.Append("refresh", BitConverter.ToString(userInfo.RefreshToken));
+
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return View("_Error", e.Message);
+        }
     }
 }

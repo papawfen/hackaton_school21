@@ -12,7 +12,7 @@ public abstract class Program
 
         builder.Services.AddControllersWithViews();
 
-        builder.Services.AddSingleton<IAuthService, AuthService>();
+        builder.Services.AddSingleton<IAuthService, DummyAuthService>();
 
         var app = builder.Build();
 
