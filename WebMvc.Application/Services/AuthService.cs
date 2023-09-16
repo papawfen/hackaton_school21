@@ -1,7 +1,7 @@
 using Grpc.Net.Client;
 using GrpcGreeterClient;
 
-namespace WebMvc.Services;
+namespace WebMvc.Application.Services;
 
 public class AuthService : IAuthService
 {

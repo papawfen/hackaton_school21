@@ -1,6 +1,6 @@
 using System;
 
-namespace WebMvc.Models.MediaEntry;
+namespace WebMvc.Application.Models.MediaEntry;
 
 public class MediaEntryBuilder
 {

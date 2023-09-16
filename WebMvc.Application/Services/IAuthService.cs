@@ -1,4 +1,4 @@
-namespace WebMvc.Services;
+namespace WebMvc.Application.Services;
 
 public interface IAuthService
 {

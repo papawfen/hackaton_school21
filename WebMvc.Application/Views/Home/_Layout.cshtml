@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link href="@Url.Content("~/css/shared/styles.css")" rel="stylesheet" type="text/css"/>
+
+    <title>FileStorage | @ViewBag.Title</title>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="@Url.Action("MyFiles")">My Files</a>
+            </li>
+            <li>
+                <a href="@Url.Action("SharedFiles")">Shared with Me</a>
+            </li>
+            <li>
+                <a href="@Url.Action("About")">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="login">
+        <a href="@Url.Action("Login")">Log In</a>
+    </div>
+</header>
+
+<div>
+    @RenderBody()
+</div>
+
+<footer>
+    @if (IsSectionDefined("Footer"))
+    {
+        @await RenderSectionAsync("Footer")
+    }
+</footer>
+
+</body>
+</html>
