@@ -12,18 +12,18 @@
     <nav>
         <ul>
             <li>
-                <a href="@Url.Action("MyFiles", "Home")">My Files</a>
+                @Html.ActionLink("My Files", "MyFiles", "Home")
             </li>
             <li>
-                <a href="@Url.Action("SharedFiles", "Home")">Shared with Me</a>
+                @Html.ActionLink("Shared with Me", "SharedFiles", "Home")
             </li>
             <li>
-                <a href="@Url.Action("About", "Home")">About</a>
+                @Html.ActionLink("About", "About", "Home")
             </li>
         </ul>
     </nav>
     <div class="login">
-        <a href="@Url.Action("Login", "Auth")">Log In</a>
+        @Html.ActionLink("Login", "Login", "Auth")
     </div>
 </header>
 
