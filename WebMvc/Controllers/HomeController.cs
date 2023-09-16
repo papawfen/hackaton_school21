@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebMvc.Models.User;
 
 namespace WebMvc.Controllers;
 
@@ -11,14 +12,18 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public string Login(string login, string password)
-        => $"{login} {password}";
+    public string Login(User user)
+        => $"{user.Login} {user.Password}";
 
+    [HttpGet]
     public IActionResult Register()
     {
         return View();
     }
-
+    
+    [HttpPost]
+    public string Register(User user)
+        => $"{user.Login} {user.Password}";
 
     [HttpGet]
     public IActionResult About()
@@ -26,11 +31,13 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
     public IActionResult MyFiles()
     {
         return View();
     }
 
+    [HttpGet]
     public IActionResult SharedFiles()
     {
         return View();

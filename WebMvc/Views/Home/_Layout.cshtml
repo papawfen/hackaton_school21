@@ -30,13 +30,13 @@
 <div>
     @RenderBody()
 </div>
-@* *@
-@* <footer> *@
-@*     @if (IsSectionDefined("Footer")) *@
-@*     { *@
-@*         @await RenderSectionAsync("Footer") *@
-@*     } *@
-@* </footer> *@
+
+<footer>
+    @if (IsSectionDefined("Footer"))
+    {
+        @await RenderSectionAsync("Footer")
+    }
+</footer>
 
 </body>
 </html>
