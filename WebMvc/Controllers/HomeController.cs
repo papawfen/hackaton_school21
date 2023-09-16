@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebMvc.Models.User;
+using Microsoft.Extensions.Logging;
 
 namespace WebMvc.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly ILogger<HomeController> _logger;
+    
+    public HomeController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+    }
+    
     [HttpGet]
     public IActionResult Login()
     {
