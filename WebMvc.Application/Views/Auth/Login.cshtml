@@ -7,11 +7,11 @@
 <form method="post">
     <div class="box-page">
         <div class="box">
-            <h2>Registration</h2>
+            <h2>Login</h2>
             <input name="login" type="text" placeholder="username">
             <input name="password" type="password" placeholder="password">
-            <button inputmode="submit">Register</button>
-            <p>Already registered? <a href="@Url.Action("Login")">Login</a></p>
+            <button inputmode="submit">Login</button>
+            <p>Need account? <a href="@Url.Action("Register", "Auth")">Register</a></p>
         </div>
     </div>
 </form>

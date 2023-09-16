@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using WebMvc.Application.Services;
 
 namespace WebMvc.Application;
 
@@ -11,12 +12,14 @@ public abstract class Program
 
         builder.Services.AddControllersWithViews();
 
+        builder.Services.AddSingleton<IAuthService, AuthService>();
+
         var app = builder.Build();
 
         app.UseStaticFiles();
         app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=Home}/{action=Login}");
+            pattern: "{controller=Auth}/{action=Login}");
 
         app.Run();
     }

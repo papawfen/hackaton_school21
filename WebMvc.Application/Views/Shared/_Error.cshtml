@@ -1,13 +1,13 @@
-﻿@page
+﻿@model string
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Error";
 }
 
 <div class="box-page">
     <div class="box">
         <h2>Error</h2>
-        <p>Something went wrong =(</p>
+        <p>@Model</p>
         <a href="@Url.Action("MyFiles", "Home")">
             <button>Go back</button>
         </a>
