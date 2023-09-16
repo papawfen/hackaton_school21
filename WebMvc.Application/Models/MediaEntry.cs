@@ -1,8 +1,8 @@
 using System;
 
-namespace WebMvc.Application.Models.MediaEntry;
+namespace WebMvc.Application.Models;
 
-public class MediaEntry : IMediaEntry
+public class MediaEntry
 {
     public string PreviewIconPath { get; set; }
     public string Name { get; set; }
