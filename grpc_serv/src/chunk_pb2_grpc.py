@@ -24,6 +24,16 @@ class FileServerStub(object):
                 request_serializer=chunk__pb2.Request.SerializeToString,
                 response_deserializer=chunk__pb2.Chunk.FromString,
                 )
+        self.getUserList = channel.unary_stream(
+                '/FileServer/getUserList',
+                request_serializer=chunk__pb2.Request.SerializeToString,
+                response_deserializer=chunk__pb2.Files.FromString,
+                )
+        self.getUserMinis = channel.unary_unary(
+                '/FileServer/getUserMinis',
+                request_serializer=chunk__pb2.Uid.SerializeToString,
+                response_deserializer=chunk__pb2.Files.FromString,
+                )
 
 
 class FileServerServicer(object):
@@ -41,6 +51,18 @@ class FileServerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def getUserList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def getUserMinis(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_FileServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -53,6 +75,16 @@ def add_FileServerServicer_to_server(servicer, server):
                     servicer.download,
                     request_deserializer=chunk__pb2.Request.FromString,
                     response_serializer=chunk__pb2.Chunk.SerializeToString,
+            ),
+            'getUserList': grpc.unary_stream_rpc_method_handler(
+                    servicer.getUserList,
+                    request_deserializer=chunk__pb2.Request.FromString,
+                    response_serializer=chunk__pb2.Files.SerializeToString,
+            ),
+            'getUserMinis': grpc.unary_unary_rpc_method_handler(
+                    servicer.getUserMinis,
+                    request_deserializer=chunk__pb2.Uid.FromString,
+                    response_serializer=chunk__pb2.Files.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,5 +127,39 @@ class FileServer(object):
         return grpc.experimental.unary_stream(request, target, '/FileServer/download',
             chunk__pb2.Request.SerializeToString,
             chunk__pb2.Chunk.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getUserList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/FileServer/getUserList',
+            chunk__pb2.Request.SerializeToString,
+            chunk__pb2.Files.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getUserMinis(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/FileServer/getUserMinis',
+            chunk__pb2.Uid.SerializeToString,
+            chunk__pb2.Files.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

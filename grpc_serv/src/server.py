@@ -1,4 +1,9 @@
 import lib
+import asyncio
 
 if __name__ == '__main__':
-    lib.FileServer().start(8765)
+    tmp_file = 'temp_file'
+    server = lib.FileServer()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(server.start(8765))
+
