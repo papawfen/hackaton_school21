@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using WebMvc.Application.Services;
+using WebMvc.Application.Services.AuthService;
 using WebMvc.Application.Services.Configuration;
 
 namespace WebMvc.Application;

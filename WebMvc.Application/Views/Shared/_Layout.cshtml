@@ -1,4 +1,4 @@
-﻿@using WebMvc.Application.Services
+﻿@using WebMvc.Application.Services.AuthService
 @inject IAuthService AuthService
 
 @{
@@ -7,22 +7,14 @@
         var cookies = Context.Request.Cookies;
         if (cookies.TryGetValue("token", out var token) && cookies.TryGetValue("username", out var login))
         {
-            try
+            if (Guid.TryParse(token, out var guidToken) && await AuthService.ContainsAsync(login, guidToken))
             {
-                if (await AuthService.ContainsAsync(login, new Guid(token)))
-                {
-                    @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
-                }
-            }
-            catch
-            {
-                // ignored
+                @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
+                return;
             }
         }
-        else
-        {
-            @Html.ActionLink("Login", "Login", "Auth")
-        }
+
+        @Html.ActionLink("Login", "Login", "Auth")
     }
 }
 

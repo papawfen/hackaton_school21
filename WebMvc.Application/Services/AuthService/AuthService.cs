@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using WebMvc.Application.Models;
 
-namespace WebMvc.Application.Services;
+namespace WebMvc.Application.Services.AuthService;
 
 public class AuthService : IAuthService
 {

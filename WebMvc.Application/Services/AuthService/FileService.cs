@@ -2,7 +2,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebMvc.Application.Services.Configuration;
 
-namespace WebMvc.Application.Services;
+namespace WebMvc.Application.Services.AuthService;
 
 public class FileService : IFileService
 {

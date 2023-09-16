@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebMvc.Application.Models;
 
-namespace WebMvc.Application.Services;
+namespace WebMvc.Application.Services.AuthService;
 
 public class DummyAuthService : IAuthService
 {
