@@ -64,7 +64,7 @@ public class AuthController : Controller
         {
             await _authService.Register(user);
 
-            return View("Login");
+            return RedirectToAction("Login", "Auth");
         }
         catch (Exception e)
         {
