@@ -3,6 +3,7 @@ from concurrent import futures
 import grpc
 import time
 import chunk_pb2, chunk_pb2_grpc
+import uuid
 
 CHUNK_SIZE = 1024 * 1024
 
@@ -25,6 +26,7 @@ class FileClient:
     def __init__(self, address):
         channel = grpc.insecure_channel(address)
         self.stub = chunk_pb2_grpc.FileServerStub(channel)
+        self.root_path = '/opt/goinfre/papawfen/hackaton_school21/grpc_serv/resources/'
 
     def upload(self, in_file_name):
         chunks_generator = get_file_chunks(in_file_name)
@@ -35,14 +37,22 @@ class FileClient:
         response = self.stub.download(chunk_pb2.Request(name=target_name))
         save_chunks_to_file(response, out_file_name)
 
+    def getUserList(self, uid):
+        path = os.path.join(self.root_path, 'aboba') ## str(uid.uuid1())
+        if os.path.isdir(path):
+            return os.listdir(path)
+        else:
+            os.mkdir(path)
+            return {0}   
+
 
 class FileServer(chunk_pb2_grpc.FileServerServicer):
     def __init__(self):
 
         class Servicer(chunk_pb2_grpc.FileServerServicer):
             def __init__(self):
-                self.tmp_file_name = '/opt/goinfre/papawfen/grpc_serv/resources'
-                self.tmp_file = '/opt/goinfre/papawfen/grpc_serv/resources/amogus.png'
+                self.tmp_file = '/opt/goinfre/papawfen/hackaton_school21/grpc_serv/resources/aboba.mp4'
+                self.root_path = '/opt/goinfre/papawfen/hackaton_school21/grpc_serv/resources/'
 
             def upload(self, request_iterator, context):
                 save_chunks_to_file(request_iterator, self.tmp_file)
@@ -56,11 +66,11 @@ class FileServer(chunk_pb2_grpc.FileServerServicer):
         chunk_pb2_grpc.add_FileServerServicer_to_server(Servicer(), self.server)
 
     def start(self, port):
-        self.server.add_insecure_port(f'[::]:{port}')
+        self.server.add_insecure_port(f'10.54.201.22:{port}') ## 10.54.201.22
         self.server.start()
 
         try:
             while True:
-                time.sleep(3600)
+                time.sleep(60 * 60 * 24)
         except KeyboardInterrupt:
             self.server.stop(0)

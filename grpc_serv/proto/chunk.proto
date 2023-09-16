@@ -4,6 +4,15 @@ syntax = "proto3";
 service FileServer {
   rpc upload(stream Chunk) returns (Reply) {}
   rpc download(Request) returns (stream Chunk) {}
+  rpc getUserList(Uid) returns (Files) {}
+}
+
+message Uid {
+  string user_uuid = 1;
+}
+
+message Files {
+  repeated string user_files = 1;
 }
 
 message Chunk {
