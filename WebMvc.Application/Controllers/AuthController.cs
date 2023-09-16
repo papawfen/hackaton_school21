@@ -30,7 +30,7 @@ public class AuthController : Controller
     {
         try
         {
-            var userInfo = await _authService.TryAuthenticate(user);
+            var userInfo = await _authService.Login(user);
 
             Response.Cookies.Append("jwt", BitConverter.ToString(userInfo.JwtToken));
             Response.Cookies.Append("refresh", BitConverter.ToString(userInfo.RefreshToken));
@@ -54,10 +54,7 @@ public class AuthController : Controller
     {
         try
         {
-            var userInfo = await _authService.TryRegister(user);
-
-            Response.Cookies.Append("jwt", BitConverter.ToString(userInfo.JwtToken));
-            Response.Cookies.Append("refresh", BitConverter.ToString(userInfo.RefreshToken));
+            await _authService.Register(user);
 
             return NoContent();
         }

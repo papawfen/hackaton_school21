@@ -5,12 +5,12 @@ namespace WebMvc.Application.Services;
 
 public class AuthService : IAuthService
 {
-    public Task<UserInfo> TryRegister(User user)
+    public Task Register(User user)
     {
         throw new System.NotImplementedException();
     }
 
-    public Task<UserInfo> TryAuthenticate(User user)
+    public Task<UserInfo> Login(User user)
     {
         throw new System.NotImplementedException();
     }
