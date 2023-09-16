@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using WebMvc.Application.Services;
+using WebMvc.Application.Services.Configuration;
 
 namespace WebMvc.Application;
 
@@ -12,7 +13,11 @@ public abstract class Program
 
         builder.Services.AddControllersWithViews();
 
+        builder.Services.Configure<FileServiceConfiguration>(
+            builder.Configuration.GetSection("FileServiceConfiguration"));
+
         builder.Services.AddSingleton<IAuthService, DummyAuthService>();
+        builder.Services.AddSingleton<IFileService, FileService>();
 
         var app = builder.Build();
 
