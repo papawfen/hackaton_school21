@@ -17,15 +17,12 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9"/>
+    </ItemGroup>
+
     <ItemGroup>
-      <Folder Include="wwwroot\Cringe\" />
-      <Folder Include="wwwroot\FullCringe\" />
+        <Folder Include="wwwroot\Cringe\" />
+        <Folder Include="wwwroot\FullCringe\" />
     </ItemGroup>
-
-    </ItemGroup>
-
-
-
 
 
 </Project>
