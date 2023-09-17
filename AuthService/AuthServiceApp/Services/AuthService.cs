@@ -19,19 +19,31 @@ public class AuthService : Auth.AuthBase
         _logger = logger;
     }
 
-    public override Task<UserAuthData> UserRegister(UserCredentials request, ServerCallContext context)
+    public override Task<UserAuthData> UserRegister(UserCredentials request, ServerCallContext _)
     {
         return Task.FromResult(Register(request));
     }
 
-    public override Task<UserAuthData> UserAuthenticate(UserCredentials request, ServerCallContext context)
+    public override Task<UserAuthData> UserAuthenticate(UserCredentials request, ServerCallContext _)
     {
         return Task.FromResult(Authenticate(request));
     }
 
-    public override Task<UserAuthData> UserRefreshJwt(UserAuthData request, ServerCallContext context)
+    public override Task<UserAuthData> UserRefreshJwt(UserAuthData request, ServerCallContext _)
     {
         return Task.FromResult(RefreshJwt(request));
+    }
+
+    public override Task<UserAuthData> UserValidateJwt(UserAuthData request, ServerCallContext _)
+    {
+        try
+        {
+            return Task.FromResult(new UserAuthData(request) { IsJwtValid = ValidateToken(request.JwtToken) });
+        }
+        catch
+        {
+            return Task.FromResult(new UserAuthData(request) { Status = AuthStatus.JwtExpired, IsJwtValid = false });
+        }
     }
 
     private static string GetHashedString(string str)
@@ -44,6 +56,7 @@ public class AuthService : Auth.AuthBase
     {
         return hashedStr.Equals(GetHashedString(str));
     }
+
 
     private static UserAuthData Register(UserCredentials request)
     {
@@ -114,6 +127,7 @@ public class AuthService : Auth.AuthBase
 
     private static UserAuthData RefreshJwt(UserAuthData request)
     {
+        var isJwtValid = ValidateToken(request.JwtToken);
         var responseData = new UserAuthData() { Status = AuthStatus.UnknownError };
         try
         {
@@ -124,7 +138,6 @@ public class AuthService : Auth.AuthBase
             {
                 if (user.RefreshTokenExpired == null)
                 {
-                    
                 }
                 else if (user.RefreshTokenExpired.Value.Ticks > DateTime.Now.Ticks)
                 {
@@ -159,7 +172,7 @@ public class AuthService : Auth.AuthBase
 
     private static string GenerateJwt()
     {
-        var certificate = new X509Certificate2("path/to/cert.pfx");
+        var certificate = new X509Certificate2("Services/snakeoil.pfx");
         var securityKey = new X509SecurityKey(certificate);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -177,7 +190,7 @@ public class AuthService : Auth.AuthBase
 
     public static bool ValidateToken(string token)
     {
-        var certificate = new X509Certificate2("path/to/cert.pfx");
+        var certificate = new X509Certificate2("Services/snakeoil.pfx");
         var securityKey = new X509SecurityKey(certificate);
         var validationParameters = new TokenValidationParameters
         {
