@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthServiceApp";
+
+package grpc;
+
+//import "user-auth-data.proto";
+//import "user-credentials.proto";
+
+option java_multiple_files = true;
+option java_package = "edu.school21.grpc";
+
+service Auth {
+  rpc UserRegister(UserCredentials) returns (UserAuthData) {}
+  rpc UserAuthenticate(UserCredentials) returns (UserAuthData) {}
+  rpc UserRefreshJwt(UserAuthData) returns (UserAuthData) {}
+  rpc UserValidateJwt(UserAuthData) returns (UserAuthData) {}
+}
+
+enum AuthStatus {
+  SIGN_UP_COMPLETE = 0;
+  USER_ALREADY_EXISTS = 1;
+  SIGN_IN_COMPLETE = 2;
+  INCORRECT_CREDENTIALS = 3;
+  JWT_EXPIRED = 4;
+  RT_EXPIRED = 5;
+  UNKNOWN_ERROR = 6;
+}
+
+message UserAuthData {
+  AuthStatus status = 1;
+  optional bytes user_uuid = 2;
+  optional string jwt_token = 3;
+  optional string refresh_token = 4;
+  optional bool is_jwt_valid = 5;
+}
+
+message UserCredentials {
+  string login = 1;
+  string password = 2;
+}

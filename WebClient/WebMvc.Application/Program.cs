@@ -17,7 +17,10 @@ public abstract class Program
         builder.Services.Configure<FileServiceConfiguration>(
             builder.Configuration.GetSection("FileServiceConfiguration"));
 
-        builder.Services.AddSingleton<IAuthService, DummyAuthService>();
+        builder.Services.Configure<AuthServiceConfiguration>(
+            builder.Configuration.GetSection("AuthServiceConfiguration"));
+
+        builder.Services.AddSingleton<IAuthService, AuthService>();
         builder.Services.AddSingleton<IFileService, FileService>();
 
         var app = builder.Build();
