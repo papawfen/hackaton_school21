@@ -13,7 +13,7 @@
             try
             {
                 if (await AuthService.ContainsAsync(login, new UserInfo
-                    (login, ByteString.CopyFrom(uuid, Encoding.Unicode), token, refresh)))
+                    (login, ByteString.FromBase64(uuid), token, refresh)))
                 {
                     @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
                     return;
