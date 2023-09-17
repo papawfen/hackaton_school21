@@ -127,7 +127,6 @@ public class AuthService : Auth.AuthBase
 
     private static UserAuthData RefreshJwt(UserAuthData request)
     {
-        var isJwtValid = ValidateToken(request.JwtToken);
         var responseData = new UserAuthData() { Status = AuthStatus.UnknownError };
         try
         {
