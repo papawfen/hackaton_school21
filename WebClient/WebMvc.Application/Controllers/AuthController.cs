@@ -47,7 +47,7 @@ public class AuthController : Controller
             {
                 Secure = true
             });
-            Response.Cookies.Append("uuid", userInfo.Uuid.ToString()!, new CookieOptions
+            Response.Cookies.Append("uuid", userInfo.Uuid.ToBase64(), new CookieOptions
             {
                 Secure = true
             });
