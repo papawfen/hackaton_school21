@@ -10,10 +10,18 @@
         var cookies = Context.Request.Cookies;
         if (cookies.TryGetValue("token", out var token) && cookies.TryGetValue("username", out var login) && cookies.TryGetValue("uuid", out var uuid) && cookies.TryGetValue("refresh", out var refresh))
         {
-            if (await AuthService.ContainsAsync(login, new UserInfo
-                (login, ByteString.CopyFrom(uuid, Encoding.Unicode),token, refresh))) 
+            try
             {
-                @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
+                if (await AuthService.ContainsAsync(login, new UserInfo
+                    (login, ByteString.CopyFrom(uuid, Encoding.Unicode), token, refresh)))
+                {
+                    @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
+                    return;
+                }
+            }
+            catch
+            {
+                @Html.ActionLink("Login", "Login", "Auth")
                 return;
             }
         }
