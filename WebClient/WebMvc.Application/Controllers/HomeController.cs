@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebMvc.Application.Models;
@@ -28,10 +29,16 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult MyFiles()
     {
-        ViewBag.Images = new List<MediaEntry>
+        // fix path
+        var images = new List<MediaEntry>();
+        foreach (var file in Directory.EnumerateFiles(
+                     "/opt/goinfre/richesea/abobus/WebClient/WebMvc.Application/wwwroot/Cringe"))
         {
-            new MediaEntryBuilder().SetName("succesful").Build()
-        };
+            var realFile = new FileInfo(file).Name;
+            images.Add(new MediaEntryBuilder().SetPreviewIconPath($"{realFile}").SetName(realFile).Build());
+        }
+
+        ViewBag.Images = images;
         return View();
     }
 
