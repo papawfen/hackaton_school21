@@ -1,13 +1,17 @@
-﻿@using WebMvc.Application.Services.AuthService
+﻿@using System.Text
+@using Google.Protobuf
+@using WebMvc.Application.Models
+@using WebMvc.Application.Services.AuthService
 @inject IAuthService AuthService
 
 @{
     async Task RenderNavBarUser()
     {
         var cookies = Context.Request.Cookies;
-        if (cookies.TryGetValue("token", out var token) && cookies.TryGetValue("username", out var login))
+        if (cookies.TryGetValue("token", out var token) && cookies.TryGetValue("username", out var login) && cookies.TryGetValue("uuid", out var uuid) && cookies.TryGetValue("refresh", out var refresh))
         {
-            if (Guid.TryParse(token, out var guidToken) && await AuthService.ContainsAsync(login, guidToken))
+            if (await AuthService.ContainsAsync(login, new UserInfo
+                (login, ByteString.CopyFrom(uuid, Encoding.Unicode),token, refresh))) 
             {
                 @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
                 return;

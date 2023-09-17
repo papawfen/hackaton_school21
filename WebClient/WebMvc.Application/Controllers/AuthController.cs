@@ -35,15 +35,19 @@ public class AuthController : Controller
         {
             var userInfo = await _authService.LoginAsync(user);
 
-            Response.Cookies.Append("token", new Guid(userInfo.Token).ToString(), new CookieOptions
+            Response.Cookies.Append("token", userInfo.Token, new CookieOptions
             {
                 Secure = true
             });
-            Response.Cookies.Append("refresh", new Guid(userInfo.RefreshToken).ToString(), new CookieOptions
+            Response.Cookies.Append("refresh", userInfo.RefreshToken, new CookieOptions
             {
                 Secure = true
             });
             Response.Cookies.Append("username", user.Login, new CookieOptions
+            {
+                Secure = true
+            });
+            Response.Cookies.Append("uuid", userInfo.Uuid.ToString()!, new CookieOptions
             {
                 Secure = true
             });
