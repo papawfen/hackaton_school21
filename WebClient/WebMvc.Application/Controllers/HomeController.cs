@@ -31,8 +31,7 @@ public class HomeController : Controller
     {
         // fix path
         var images = new List<MediaEntry>();
-        foreach (var file in Directory.EnumerateFiles(
-                     "/opt/goinfre/richesea/abobus/WebClient/WebMvc.Application/wwwroot/Cringe"))
+        foreach (var file in Directory.EnumerateFiles($"{Directory.GetCurrentDirectory()}" + "/wwwroot/Cringe"))
         {
             var realFile = new FileInfo(file).Name;
             images.Add(new MediaEntryBuilder().SetPreviewIconPath($"{realFile}").SetName(realFile).Build());
