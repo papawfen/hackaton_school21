@@ -1,0 +1,15 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<div class="box-page">
+    <div class="box">
+        <h2>Error</h2>
+        <p>@Model</p>
+        <a href="@Url.Action("Login", "Auth")">
+            <button>Go back</button>
+        </a>
+    </div>
+</div>

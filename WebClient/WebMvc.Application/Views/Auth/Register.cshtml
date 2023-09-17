@@ -1,0 +1,17 @@
+﻿@page
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<form method="post">
+    <div class="box-page">
+        <div class="box">
+            <h2>Registration</h2>
+            <input name="login" type="text" placeholder="username">
+            <input name="password" type="password" placeholder="password">
+            <button inputmode="submit">Register</button>
+            <p>Already registered? <a href="@Url.Action("Login", "Auth")">Login</a></p>
+        </div>
+    </div>
+</form>

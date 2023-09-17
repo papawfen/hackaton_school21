@@ -1,0 +1,62 @@
+﻿@using WebMvc.Application.Services.AuthService
+@inject IAuthService AuthService
+
+@{
+    async Task RenderNavBarUser()
+    {
+        var cookies = Context.Request.Cookies;
+        if (cookies.TryGetValue("token", out var token) && cookies.TryGetValue("username", out var login))
+        {
+            if (Guid.TryParse(token, out var guidToken) && await AuthService.ContainsAsync(login, guidToken))
+            {
+                @Html.Raw($"Hi, {Context.Request.Cookies["username"]}")
+                return;
+            }
+        }
+
+        @Html.ActionLink("Login", "Login", "Auth")
+    }
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link href="@Url.Content("~/css/shared/styles.css")" rel="stylesheet" type="text/css"/>
+
+    <title>FileStorage | @ViewBag.Title</title>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li>
+                @Html.ActionLink("My Files", "MyFiles", "Home")
+            </li>
+            <li>
+                @Html.ActionLink("Shared with Me", "SharedFiles", "Home")
+            </li>
+            <li>
+                @Html.ActionLink("About", "About", "Home")
+            </li>
+        </ul>
+    </nav>
+    <div class="login">
+        @{ await RenderNavBarUser(); }
+    </div>
+</header>
+
+<div>
+    @RenderBody()
+</div>
+
+<footer>
+    @if (IsSectionDefined("Footer"))
+    {
+        @await RenderSectionAsync("Footer")
+    }
+</footer>
+
+</body>
+</html>
