@@ -32,7 +32,7 @@ nav a {
     transition: background-color 0.3s;
 }
 
-.login a {
+.login a, .file_input_class {
     text-decoration: none;
     background-color: #ff5733;
     color: #ffffff;
@@ -43,7 +43,7 @@ nav a {
     transition: background-color 0.3s;
 }
 
-nav a:hover {
+nav a:hover, .file_input_class:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
