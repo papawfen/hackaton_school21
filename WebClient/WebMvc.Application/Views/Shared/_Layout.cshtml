@@ -59,4 +59,32 @@
 </footer>
 
 </body>
+
+
+<script>
+function openModal(imageSrc, imageName) {
+    var modal = document.getElementById("myModal");
+    var modalImg = document.getElementById("modalImage");
+    modal.style.display = "block";
+    modalImg.src = imageSrc; // Set the full-sized image source
+    modalImg.alt = imageName; // Set the image alt text
+    
+    document.addEventListener("keydown", closeModalOnEscape);
+}
+
+// Close the modal
+function closeModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+    
+    document.removeEventListener("keydown", closeModalOnEscape);
+}
+
+function closeModalOnEscape(event) {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+}
+</script>
+
 </html>

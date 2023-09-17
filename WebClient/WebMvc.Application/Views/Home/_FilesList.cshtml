@@ -5,14 +5,19 @@
         <div class="grid-container">
             @foreach (var file in Model)
             {
-                <div class="grid-item">
-                    <img src="https://www.shutterstock.com/shutterstock/photos/1905929728/display_1500/stock-photo-skeptic-surprised-cat-thinking-dont-know-what-to-do-big-eyes-closeup-tabby-cat-look-side-dont-1905929728.jpg" alt="text" class="grid-item-content">
+                <div class="grid-item" onclick="openModal('/FullCringe/@file.PreviewIconPath', '@file.Name')">
+                    <img src="/Cringe/@file.PreviewIconPath" alt="text" class="grid-item-content">
                     @file.Name
                 </div>
             }
         </div>
     </div>
 </main>
+
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal();">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 
 @* <ul> *@
 @*     @foreach (var file in Model) *@
