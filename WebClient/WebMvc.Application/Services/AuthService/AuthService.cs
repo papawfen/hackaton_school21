@@ -1,9 +1,9 @@
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using WebMvc.Application.Models;
 using AuthServiceApp;
 using Grpc.Net.Client;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebMvc.Application.Services.Configuration;
 
@@ -12,10 +12,13 @@ namespace WebMvc.Application.Services.AuthService;
 public sealed class AuthService : IAuthService
 {
     private readonly AuthServiceConfiguration _authServiceConfiguration;
+    private readonly ILogger<FileService> _logger;
 
-    public AuthService(IOptions<AuthServiceConfiguration> authService)
+    public AuthService(ILogger<FileService> logger, IOptions<AuthServiceConfiguration> authService)
     {
         _authServiceConfiguration = authService.Value;
+        _logger = logger;
+        _logger.LogInformation(_authServiceConfiguration.Address);
     }
 
     public async Task RegisterAsync(User user)

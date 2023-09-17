@@ -14,6 +14,6 @@ public class FileService : IFileService
     {
         _logger = logger;
         _fileServiceConfiguration = fileServiceConfiguration.Value;
-        _logger.LogWarning(_fileServiceConfiguration.Address);
+        _logger.LogInformation(_fileServiceConfiguration.Address);
     }
 }
