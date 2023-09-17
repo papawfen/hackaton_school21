@@ -1,0 +1,29 @@
+
+syntax = "proto3";
+
+service FileServer {
+  rpc upload(stream Chunk) returns (Reply) {}
+  rpc download(Request) returns (stream Chunk) {}
+  rpc getUserList(Request) returns (stream Files) {}
+  rpc getUserMinis(Uid) returns (Files) {}
+}
+
+message Uid {
+  string user_uuid = 1;
+}
+
+message Files {
+  string user_files = 1;
+}
+
+message Chunk {
+  bytes buffer = 1;
+}
+
+message Request {
+  string uid = 1;
+}
+
+message Reply {
+  int32 length = 1;
+}
