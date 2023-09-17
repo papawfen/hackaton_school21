@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthServiceApp";
+
+package grpc;
+
+message UserAuthData {
+  optional bytes user_uuid = 1;
+  optional string jwt_token = 2;
+  optional string refresh_token = 3;
+}
+
